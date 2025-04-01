@@ -1,15 +1,22 @@
-"use client"
+"use client";
 
-import { useEffect } from "react"
-import { Button } from "@/components/ui/button"
-import { CheckCircle, Clock, GraduationCap, Award, ArrowLeft } from "lucide-react"
-import Link from "next/link"
-import Image from "next/image"
+import { useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import {
+  CheckCircle,
+  Clock,
+  GraduationCap,
+  Award,
+  ArrowLeft,
+} from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
 
 const coursesData = {
   cpp: {
     title: "C++ Programming",
-    description: "Master C++ from basics to advanced concepts with practical projects.",
+    description:
+      "Master C++ from basics to advanced concepts with practical projects.",
     icon: "💻",
     color: "from-blue-500 to-blue-600",
     duration: "12 weeks",
@@ -151,22 +158,28 @@ const coursesData = {
     whoShouldEnroll:
       "This course is ideal for programmers with strong mathematical backgrounds, data scientists looking to expand their skills, and professionals interested in AI and automation. Prior programming experience and basic statistics knowledge are required.",
   },
-}
+};
 
-export default function CourseDetailsPage({ params }: { params: { slug: string } }) {
+export default function CourseDetailsPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
   // Scroll to top when the page loads
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    window.scrollTo(0, 0);
+  }, []);
 
-  const course = coursesData[params.slug as keyof typeof coursesData]
+  const course = coursesData[params.slug as keyof typeof coursesData];
 
   if (!course) {
     return (
       <main className="flex flex-col items-center justify-center min-h-screen pt-24">
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-3xl font-bold mb-4">Course Not Found</h1>
-          <p className="mb-8">The course you're looking for doesn't exist or has been removed.</p>
+          <p className="mb-8">
+            The course you're looking for doesn't exist or has been removed.
+          </p>
           <Link href="/courses">
             <Button>
               <ArrowLeft className="mr-2 h-4 w-4" />
@@ -175,14 +188,17 @@ export default function CourseDetailsPage({ params }: { params: { slug: string }
           </Link>
         </div>
       </main>
-    )
+    );
   }
 
   return (
     <main className="flex flex-col items-center justify-between pt-24">
       <section className="w-full py-12 md:py-24">
         <div className="container mx-auto px-4">
-          <Link href="/courses" className="inline-flex items-center text-blue-600 hover:underline mb-8">
+          <Link
+            href="/courses"
+            className="inline-flex items-center text-blue-600 hover:underline mb-8"
+          >
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Courses
           </Link>
@@ -194,21 +210,32 @@ export default function CourseDetailsPage({ params }: { params: { slug: string }
                 <div className="p-8">
                   <div className="flex items-center mb-6">
                     <div className="text-4xl mr-4">{course.icon}</div>
-                    <h1 className="text-3xl font-bold text-gray-900">{course.title}</h1>
+                    <h1 className="text-3xl font-bold text-gray-900">
+                      {course.title}
+                    </h1>
                   </div>
 
                   <div className="relative w-full h-64 md:h-80 mb-8 rounded-lg overflow-hidden">
-                    <Image src={course.image || "/placeholder.svg"} alt={course.title} fill className="object-cover" />
+                    <Image
+                      src={course.image || "/placeholder.svg"}
+                      alt={course.title}
+                      fill
+                      className="object-cover"
+                    />
                   </div>
 
                   <div className="space-y-8">
                     <div>
-                      <h2 className="text-xl font-bold mb-4 text-gray-900">Course Overview</h2>
+                      <h2 className="text-xl font-bold mb-4 text-gray-900">
+                        Course Overview
+                      </h2>
                       <p className="text-gray-600">{course.overview}</p>
                     </div>
 
                     <div>
-                      <h2 className="text-xl font-bold mb-4 text-gray-900">Key Topics</h2>
+                      <h2 className="text-xl font-bold mb-4 text-gray-900">
+                        Key Topics
+                      </h2>
                       <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
                         {course.keyTopics.map((topic, index) => (
                           <li key={index} className="flex items-start">
@@ -220,7 +247,9 @@ export default function CourseDetailsPage({ params }: { params: { slug: string }
                     </div>
 
                     <div>
-                      <h2 className="text-xl font-bold mb-4 text-gray-900">Who Should Enroll</h2>
+                      <h2 className="text-xl font-bold mb-4 text-gray-900">
+                        Who Should Enroll
+                      </h2>
                       <p className="text-gray-600">{course.whoShouldEnroll}</p>
                     </div>
                   </div>
@@ -232,14 +261,18 @@ export default function CourseDetailsPage({ params }: { params: { slug: string }
               <div className="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 md:sticky md:top-24">
                 <div className={`h-2 bg-gradient-to-r ${course.color}`} />
                 <div className="p-6">
-                  <h2 className="text-xl font-bold mb-6 text-gray-900">Course Details</h2>
+                  <h2 className="text-xl font-bold mb-6 text-gray-900">
+                    Course Details
+                  </h2>
 
                   <div className="space-y-4 mb-8">
                     <div className="flex items-center">
                       <Clock className="h-5 w-5 text-blue-600 mr-3" />
                       <div>
                         <p className="text-sm text-gray-500">Duration</p>
-                        <p className="font-medium text-gray-900">{course.duration}</p>
+                        <p className="font-medium text-gray-900">
+                          {course.duration}
+                        </p>
                       </div>
                     </div>
 
@@ -247,7 +280,9 @@ export default function CourseDetailsPage({ params }: { params: { slug: string }
                       <GraduationCap className="h-5 w-5 text-blue-600 mr-3" />
                       <div>
                         <p className="text-sm text-gray-500">Level</p>
-                        <p className="font-medium text-gray-900">{course.level}</p>
+                        <p className="font-medium text-gray-900">
+                          {course.level}
+                        </p>
                       </div>
                     </div>
 
@@ -255,7 +290,9 @@ export default function CourseDetailsPage({ params }: { params: { slug: string }
                       <Award className="h-5 w-5 text-blue-600 mr-3" />
                       <div>
                         <p className="text-sm text-gray-500">Certification</p>
-                        <p className="font-medium text-gray-900">{course.certification}</p>
+                        <p className="font-medium text-gray-900">
+                          {course.certification}
+                        </p>
                       </div>
                     </div>
                   </div>
@@ -270,6 +307,5 @@ export default function CourseDetailsPage({ params }: { params: { slug: string }
         </div>
       </section>
     </main>
-  )
+  );
 }
-
