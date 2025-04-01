@@ -1,14 +1,15 @@
-"use client"
+"use client";
 
-import { useEffect } from "react"
-import Link from "next/link"
-import { ArrowRight } from "lucide-react"
+import { useEffect } from "react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 
 const courses = [
   {
     id: "cpp",
     title: "C++ Programming",
-    description: "Master C++ from basics to advanced concepts with practical projects.",
+    description:
+      "Master C++ from basics to advanced concepts with practical projects.",
     icon: "💻",
     color: "from-blue-500 to-blue-600",
     duration: "12 weeks",
@@ -62,7 +63,8 @@ const courses = [
   {
     id: "python",
     title: "Python Programming",
-    description: "Learn Python for data science, web development, and automation.",
+    description:
+      "Learn Python for data science, web development, and automation.",
     icon: "🐍",
     color: "from-blue-400 to-blue-500",
     duration: "10 weeks",
@@ -71,19 +73,20 @@ const courses = [
   {
     id: "web-dev",
     title: "Full Stack Web Development",
-    description: "Comprehensive course covering both frontend and backend technologies.",
+    description:
+      "Comprehensive course covering both frontend and backend technologies.",
     icon: "🌍",
     color: "from-pink-500 to-pink-600",
     duration: "16 weeks",
     level: "Beginner to Advanced",
   },
-]
+];
 
 export default function CoursesPage() {
   // Scroll to top when the page loads
   useEffect(() => {
-    window.scrollTo(0, 0)
-  }, [])
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <main className="flex flex-col items-center justify-between pt-24">
@@ -94,7 +97,8 @@ export default function CoursesPage() {
               Our Courses
             </h1>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Explore our comprehensive range of IT courses designed to boost your tech career
+              Explore our comprehensive range of IT courses designed to boost
+              your tech career
             </p>
           </div>
 
@@ -104,11 +108,15 @@ export default function CoursesPage() {
                 <div className="bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 h-full border border-gray-100 group">
                   <div className={`h-2 bg-gradient-to-r ${course.color}`} />
                   <div className="p-4 sm:p-6">
-                    <div className="text-3xl sm:text-4xl mb-3 sm:mb-4">{course.icon}</div>
+                    <div className="text-3xl sm:text-4xl mb-3 sm:mb-4">
+                      {course.icon}
+                    </div>
                     <h3 className="text-lg sm:text-xl font-bold mb-2 text-gray-900 group-hover:text-blue-600 transition-colors">
                       {course.title}
                     </h3>
-                    <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">{course.description}</p>
+                    <p className="text-sm sm:text-base text-gray-600 mb-3 sm:mb-4">
+                      {course.description}
+                    </p>
                     <div className="flex justify-between items-center text-xs sm:text-sm text-gray-500 mb-3 sm:mb-4">
                       <span>{course.duration}</span>
                       <span>{course.level}</span>
@@ -125,6 +133,5 @@ export default function CoursesPage() {
         </div>
       </section>
     </main>
-  )
+  );
 }
-
