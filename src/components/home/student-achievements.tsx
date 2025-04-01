@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -57,12 +57,12 @@ export default function StudentAchievements() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const sliderRef = useRef<HTMLDivElement>(null);
 
-  const nextSlide = () => {
+  const nextSlide = useCallback(() => {
     if (!sliderRef.current) return;
 
     const items = activeTab === "placements" ? companyLogos : certifications;
     setCurrentSlide((prev) => (prev + 1) % Math.ceil(items.length / 4));
-  };
+  }, [activeTab, companyLogos, certifications]);
 
   useEffect(() => {
     const interval = setInterval(() => {
