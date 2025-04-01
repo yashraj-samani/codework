@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { motion } from "framer-motion"
-import Image from "next/image"
-import { ChevronLeft, ChevronRight, Star } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { useState } from "react";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const testimonials = [
   {
@@ -43,18 +43,20 @@ const testimonials = [
       "Even as a designer, understanding code has made me better at my job. The web development courses were perfect for my needs.",
     rating: 5,
   },
-]
+];
 
 export default function Testimonials() {
-  const [activeIndex, setActiveIndex] = useState(0)
+  const [activeIndex, setActiveIndex] = useState(0);
 
   const nextTestimonial = () => {
-    setActiveIndex((prev) => (prev + 1) % testimonials.length)
-  }
+    setActiveIndex((prev) => (prev + 1) % testimonials.length);
+  };
 
   const prevTestimonial = () => {
-    setActiveIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
-  }
+    setActiveIndex(
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length
+    );
+  };
 
   return (
     <section className="w-full py-20 bg-gray-50">
@@ -95,14 +97,20 @@ export default function Testimonials() {
                         />
                       </div>
                       <div className="text-center sm:text-left">
-                        <h3 className="text-lg font-bold text-gray-900">{testimonial.name}</h3>
-                        <p className="text-sm text-gray-600">{testimonial.role}</p>
+                        <h3 className="text-lg font-bold text-gray-900">
+                          {testimonial.name}
+                        </h3>
+                        <p className="text-sm text-gray-600">
+                          {testimonial.role}
+                        </p>
                         <div className="flex mt-1 justify-center sm:justify-start">
                           {[...Array(5)].map((_, i) => (
                             <Star
                               key={i}
                               className={`h-4 w-4 ${
-                                i < testimonial.rating ? "text-yellow-500 fill-yellow-500" : "text-gray-300"
+                                i < testimonial.rating
+                                  ? "text-yellow-500 fill-yellow-500"
+                                  : "text-gray-300"
                               }`}
                             />
                           ))}
@@ -110,7 +118,7 @@ export default function Testimonials() {
                       </div>
                     </div>
                     <p className="text-sm sm:text-base text-gray-600 italic text-center sm:text-left">
-                      "{testimonial.content}"
+                      &quot;{testimonial.content}&quot;
                     </p>
                   </div>
                 </div>
@@ -153,6 +161,5 @@ export default function Testimonials() {
         </div>
       </div>
     </section>
-  )
+  );
 }
-

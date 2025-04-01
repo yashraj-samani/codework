@@ -1,78 +1,81 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { useEffect } from "react"
-import { useState } from "react"
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Mail, Phone, MapPin, Send } from "lucide-react"
-import { useSearchParams } from "next/navigation"
-import Link from "next/link"
+import type React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 
 export default function ContactPage() {
-  const searchParams = useSearchParams()
+  // const searchParams = useSearchParams()
   const [formState, setFormState] = useState({
     name: "",
     email: "",
     subject: "",
     message: "",
-  })
+  });
 
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   // Handle scroll to section when page loads with hash
   useEffect(() => {
     // Check if we need to scroll to the get-in-touch section
     if (window.location.hash === "#get-in-touch") {
-      const element = document.getElementById("get-in-touch")
+      const element = document.getElementById("get-in-touch");
       if (element) {
         // Add a slight delay to ensure the page is fully loaded
         setTimeout(() => {
           // Scroll with offset to account for fixed header
-          const headerOffset = 100
-          const elementPosition = element.getBoundingClientRect().top
-          const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+          const headerOffset = 100;
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition =
+            elementPosition + window.pageYOffset - headerOffset;
 
           window.scrollTo({
             top: offsetPosition,
             behavior: "smooth",
-          })
-        }, 100)
+          });
+        }, 100);
       }
     }
-  }, [])
+  }, []);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormState({
       ...formState,
       [e.target.name]: e.target.value,
-    })
-  }
+    });
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+    e.preventDefault();
+    setIsSubmitting(true);
 
     // Simulate form submission
     setTimeout(() => {
-      setIsSubmitting(false)
-      setIsSubmitted(true)
+      setIsSubmitting(false);
+      setIsSubmitted(true);
       setFormState({
         name: "",
         email: "",
         subject: "",
         message: "",
-      })
+      });
 
       // Reset success message after 5 seconds
       setTimeout(() => {
-        setIsSubmitted(false)
-      }, 5000)
-    }, 1500)
-  }
+        setIsSubmitted(false);
+      }, 5000);
+    }, 1500);
+  };
 
   return (
     <main className="flex flex-col items-center justify-between pt-24">
@@ -98,7 +101,10 @@ export default function ContactPage() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <h2 id="get-in-touch" className="text-2xl font-bold mb-6 text-gray-900">
+              <h2
+                id="get-in-touch"
+                className="text-2xl font-bold mb-6 text-gray-900"
+              >
                 Get In Touch
               </h2>
 
@@ -107,7 +113,9 @@ export default function ContactPage() {
                   <MapPin className="h-6 w-6 text-blue-600 mt-1 mr-4" />
                   <div>
                     <h3 className="font-medium text-gray-900">Address</h3>
-                    <p className="text-gray-600 mt-1">123 Education Ave, Tech City, TC 12345</p>
+                    <p className="text-gray-600 mt-1">
+                      123 Education Ave, Tech City, TC 12345
+                    </p>
                   </div>
                 </div>
 
@@ -129,7 +137,9 @@ export default function ContactPage() {
               </div>
 
               <div className="bg-gray-50 rounded-xl p-6 border border-gray-100">
-                <h3 className="text-lg font-medium mb-4 text-gray-900">Office Hours</h3>
+                <h3 className="text-lg font-medium mb-4 text-gray-900">
+                  Office Hours
+                </h3>
                 <ul className="space-y-2 text-gray-600">
                   <li className="flex justify-between">
                     <span>Monday - Friday:</span>
@@ -153,7 +163,9 @@ export default function ContactPage() {
               transition={{ duration: 0.8, delay: 0.2 }}
             >
               <div className="bg-white rounded-xl p-6 sm:p-8 shadow-lg border border-gray-100">
-                <h2 className="text-2xl font-bold mb-6 text-gray-900">Send Us a Message</h2>
+                <h2 className="text-2xl font-bold mb-6 text-gray-900">
+                  Send Us a Message
+                </h2>
 
                 {isSubmitted ? (
                   <motion.div
@@ -162,13 +174,18 @@ export default function ContactPage() {
                     className="bg-green-50 text-green-800 p-4 rounded-lg mb-6"
                   >
                     <p className="font-medium">Message sent successfully!</p>
-                    <p className="text-sm mt-1">We'll get back to you as soon as possible.</p>
+                    <p className="text-sm mt-1">
+                      We&#39;ll get back to you as soon as possible.
+                    </p>
                   </motion.div>
                 ) : null}
 
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
+                    <label
+                      htmlFor="name"
+                      className="block text-sm font-medium text-gray-700 mb-1"
+                    >
                       Your Name
                     </label>
                     <Input
@@ -182,7 +199,10 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium text-gray-700 mb-1"
+                    >
                       Email Address
                     </label>
                     <Input
@@ -197,7 +217,10 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">
+                    <label
+                      htmlFor="subject"
+                      className="block text-sm font-medium text-gray-700 mb-1"
+                    >
                       Subject
                     </label>
                     <Input
@@ -211,7 +234,10 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">
+                    <label
+                      htmlFor="message"
+                      className="block text-sm font-medium text-gray-700 mb-1"
+                    >
                       Message
                     </label>
                     <Textarea
@@ -269,7 +295,9 @@ export default function ContactPage() {
 
       <section className="w-full py-12 md:py-24 bg-gray-50">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-12 text-gray-900">Find Us Here</h2>
+          <h2 className="text-3xl font-bold mb-12 text-gray-900">
+            Find Us Here
+          </h2>
 
           <div className="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 h-[250px] sm:h-[400px] max-w-6xl mx-auto">
             {/* Google Maps would go here in a real implementation */}
@@ -287,7 +315,8 @@ export default function ContactPage() {
               Ready to Start Your Tech Journey?
             </h2>
             <p className="text-white/90 mb-6 sm:mb-8">
-              Join our community of tech enthusiasts and take the first step towards a successful career in technology.
+              Join our community of tech enthusiasts and take the first step
+              towards a successful career in technology.
             </p>
             <Link href="/contact#get-in-touch">
               <Button
@@ -301,6 +330,5 @@ export default function ContactPage() {
         </div>
       </section>
     </main>
-  )
+  );
 }
-
