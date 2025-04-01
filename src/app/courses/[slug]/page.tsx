@@ -178,7 +178,8 @@ export default function CourseDetailsPage({
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-3xl font-bold mb-4">Course Not Found</h1>
           <p className="mb-8">
-            The course you're looking for doesn't exist or has been removed.
+            The course you&#39;re looking for doesn&#39;t exist or has been
+            removed.
           </p>
           <Link href="/courses">
             <Button>

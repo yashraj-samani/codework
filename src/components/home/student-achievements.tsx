@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { useEffect, useRef, useState } from "react"
-import { motion } from "framer-motion"
-import Image from "next/image"
-import { ChevronLeft, ChevronRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import Image from "next/image";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const companyLogos = [
   { name: "Google", logo: "/placeholder.svg?height=60&width=120" },
@@ -15,47 +15,72 @@ const companyLogos = [
   { name: "Netflix", logo: "/placeholder.svg?height=60&width=120" },
   { name: "Tesla", logo: "/placeholder.svg?height=60&width=120" },
   { name: "IBM", logo: "/placeholder.svg?height=60&width=120" },
-]
+];
 
 const certifications = [
-  { name: "AWS Certified Solutions Architect", logo: "/placeholder.svg?height=80&width=80", student: "Alex Johnson" },
-  { name: "Google Cloud Professional", logo: "/placeholder.svg?height=80&width=80", student: "Maria Garcia" },
-  { name: "Microsoft Certified: Azure Developer", logo: "/placeholder.svg?height=80&width=80", student: "David Chen" },
-  { name: "Oracle Certified Professional", logo: "/placeholder.svg?height=80&width=80", student: "Sarah Williams" },
+  {
+    name: "AWS Certified Solutions Architect",
+    logo: "/placeholder.svg?height=80&width=80",
+    student: "Alex Johnson",
+  },
+  {
+    name: "Google Cloud Professional",
+    logo: "/placeholder.svg?height=80&width=80",
+    student: "Maria Garcia",
+  },
+  {
+    name: "Microsoft Certified: Azure Developer",
+    logo: "/placeholder.svg?height=80&width=80",
+    student: "David Chen",
+  },
+  {
+    name: "Oracle Certified Professional",
+    logo: "/placeholder.svg?height=80&width=80",
+    student: "Sarah Williams",
+  },
   {
     name: "Cisco Certified Network Professional",
     logo: "/placeholder.svg?height=80&width=80",
     student: "James Wilson",
   },
-  { name: "CompTIA Security+", logo: "/placeholder.svg?height=80&width=80", student: "Emily Brown" },
-]
+  {
+    name: "CompTIA Security+",
+    logo: "/placeholder.svg?height=80&width=80",
+    student: "Emily Brown",
+  },
+];
 
 export default function StudentAchievements() {
-  const [activeTab, setActiveTab] = useState<"placements" | "certifications">("placements")
-  const [currentSlide, setCurrentSlide] = useState(0)
-  const sliderRef = useRef<HTMLDivElement>(null)
+  const [activeTab, setActiveTab] = useState<"placements" | "certifications">(
+    "placements"
+  );
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const sliderRef = useRef<HTMLDivElement>(null);
+
+  const nextSlide = () => {
+    if (!sliderRef.current) return;
+
+    const items = activeTab === "placements" ? companyLogos : certifications;
+    setCurrentSlide((prev) => (prev + 1) % Math.ceil(items.length / 4));
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
-      nextSlide()
-    }, 5000)
+      nextSlide();
+    }, 5000);
 
-    return () => clearInterval(interval)
-  }, [currentSlide])
-
-  const nextSlide = () => {
-    if (!sliderRef.current) return
-
-    const items = activeTab === "placements" ? companyLogos : certifications
-    setCurrentSlide((prev) => (prev + 1) % Math.ceil(items.length / 4))
-  }
+    return () => clearInterval(interval);
+  }, [currentSlide, nextSlide]);
 
   const prevSlide = () => {
-    if (!sliderRef.current) return
+    if (!sliderRef.current) return;
 
-    const items = activeTab === "placements" ? companyLogos : certifications
-    setCurrentSlide((prev) => (prev - 1 + Math.ceil(items.length / 4)) % Math.ceil(items.length / 4))
-  }
+    const items = activeTab === "placements" ? companyLogos : certifications;
+    setCurrentSlide(
+      (prev) =>
+        (prev - 1 + Math.ceil(items.length / 4)) % Math.ceil(items.length / 4)
+    );
+  };
 
   return (
     <section className="w-full py-20">
@@ -71,7 +96,8 @@ export default function StudentAchievements() {
             Student Achievements
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            Our students excel in their careers and earn prestigious certifications
+            Our students excel in their careers and earn prestigious
+            certifications
           </p>
         </motion.div>
 
@@ -79,22 +105,26 @@ export default function StudentAchievements() {
           <div className="inline-flex rounded-lg border border-gray-200 p-1 bg-white">
             <button
               onClick={() => {
-                setActiveTab("placements")
-                setCurrentSlide(0)
+                setActiveTab("placements");
+                setCurrentSlide(0);
               }}
               className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
-                activeTab === "placements" ? "bg-blue-600 text-white" : "text-gray-600 hover:text-blue-600"
+                activeTab === "placements"
+                  ? "bg-blue-600 text-white"
+                  : "text-gray-600 hover:text-blue-600"
               }`}
             >
               Hired Students
             </button>
             <button
               onClick={() => {
-                setActiveTab("certifications")
-                setCurrentSlide(0)
+                setActiveTab("certifications");
+                setCurrentSlide(0);
               }}
               className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
-                activeTab === "certifications" ? "bg-blue-600 text-white" : "text-gray-600 hover:text-blue-600"
+                activeTab === "certifications"
+                  ? "bg-blue-600 text-white"
+                  : "text-gray-600 hover:text-blue-600"
               }`}
             >
               International Certifications
@@ -103,7 +133,10 @@ export default function StudentAchievements() {
         </div>
 
         <div className="relative max-w-5xl mx-auto">
-          <div ref={sliderRef} className="overflow-hidden rounded-xl bg-white p-8 shadow-lg border border-gray-100">
+          <div
+            ref={sliderRef}
+            className="overflow-hidden rounded-xl bg-white p-8 shadow-lg border border-gray-100"
+          >
             <div
               className="flex transition-transform duration-500 ease-in-out"
               style={{
@@ -113,47 +146,55 @@ export default function StudentAchievements() {
               {activeTab === "placements" ? (
                 <div className="w-full flex-shrink-0">
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 sm:gap-8">
-                    {companyLogos.slice(0, Math.min(8, companyLogos.length)).map((company, index) => (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: index * 0.1 }}
-                        className="flex items-center justify-center p-4 bg-gray-50 rounded-lg hover:shadow-md transition-all"
-                      >
-                        <Image
-                          src={company.logo || "/placeholder.svg"}
-                          alt={company.name}
-                          width={120}
-                          height={60}
-                          className="object-contain h-12"
-                        />
-                      </motion.div>
-                    ))}
+                    {companyLogos
+                      .slice(0, Math.min(8, companyLogos.length))
+                      .map((company, index) => (
+                        <motion.div
+                          key={index}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.5, delay: index * 0.1 }}
+                          className="flex items-center justify-center p-4 bg-gray-50 rounded-lg hover:shadow-md transition-all"
+                        >
+                          <Image
+                            src={company.logo || "/placeholder.svg"}
+                            alt={company.name}
+                            width={120}
+                            height={60}
+                            className="object-contain h-12"
+                          />
+                        </motion.div>
+                      ))}
                   </div>
                 </div>
               ) : (
                 <div className="w-full flex-shrink-0">
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
-                    {certifications.slice(0, Math.min(6, certifications.length)).map((cert, index) => (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: index * 0.1 }}
-                        className="flex flex-col items-center p-4 bg-gray-50 rounded-lg hover:shadow-md transition-all"
-                      >
-                        <Image
-                          src={cert.logo || "/placeholder.svg"}
-                          alt={cert.name}
-                          width={80}
-                          height={80}
-                          className="object-contain h-16 w-16 mb-3"
-                        />
-                        <h3 className="text-sm font-medium text-gray-900 text-center">{cert.name}</h3>
-                        <p className="text-xs text-gray-500 mt-1">{cert.student}</p>
-                      </motion.div>
-                    ))}
+                    {certifications
+                      .slice(0, Math.min(6, certifications.length))
+                      .map((cert, index) => (
+                        <motion.div
+                          key={index}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ duration: 0.5, delay: index * 0.1 }}
+                          className="flex flex-col items-center p-4 bg-gray-50 rounded-lg hover:shadow-md transition-all"
+                        >
+                          <Image
+                            src={cert.logo || "/placeholder.svg"}
+                            alt={cert.name}
+                            width={80}
+                            height={80}
+                            className="object-contain h-16 w-16 mb-3"
+                          />
+                          <h3 className="text-sm font-medium text-gray-900 text-center">
+                            {cert.name}
+                          </h3>
+                          <p className="text-xs text-gray-500 mt-1">
+                            {cert.student}
+                          </p>
+                        </motion.div>
+                      ))}
                   </div>
                 </div>
               )}
@@ -182,7 +223,11 @@ export default function StudentAchievements() {
         </div>
         <div className="flex justify-center mt-4 space-x-2 sm:hidden">
           {Array.from({
-            length: Math.ceil((activeTab === "placements" ? companyLogos.length : certifications.length) / 4),
+            length: Math.ceil(
+              (activeTab === "placements"
+                ? companyLogos.length
+                : certifications.length) / 4
+            ),
           }).map((_, index) => (
             <button
               key={index}
@@ -196,6 +241,5 @@ export default function StudentAchievements() {
         </div>
       </div>
     </section>
-  )
+  );
 }
-
