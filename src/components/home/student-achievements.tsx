@@ -62,7 +62,7 @@ export default function StudentAchievements() {
 
     const items = activeTab === "placements" ? companyLogos : certifications;
     setCurrentSlide((prev) => (prev + 1) % Math.ceil(items.length / 4));
-  }, [activeTab, companyLogos, certifications]);
+  }, [activeTab]);
 
   useEffect(() => {
     const interval = setInterval(() => {
