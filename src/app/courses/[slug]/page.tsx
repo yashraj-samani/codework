@@ -160,10 +160,14 @@ const coursesData = {
   },
 };
 
+interface CourseParams {
+  slug: string;
+}
+
 export default function CourseDetailsPage({
   params,
 }: {
-  params: { slug: string };
+  params: CourseParams;
 }) {
   // Scroll to top when the page loads
   useEffect(() => {
@@ -203,7 +207,6 @@ export default function CourseDetailsPage({
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Courses
           </Link>
-
           <div className="grid md:grid-cols-3 gap-6 md:gap-8">
             <div className="md:col-span-2">
               <div className="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100">
@@ -215,7 +218,6 @@ export default function CourseDetailsPage({
                       {course.title}
                     </h1>
                   </div>
-
                   <div className="relative w-full h-64 md:h-80 mb-8 rounded-lg overflow-hidden">
                     <Image
                       src={course.image || "/placeholder.svg"}
@@ -224,7 +226,6 @@ export default function CourseDetailsPage({
                       className="object-cover"
                     />
                   </div>
-
                   <div className="space-y-8">
                     <div>
                       <h2 className="text-xl font-bold mb-4 text-gray-900">
@@ -232,7 +233,6 @@ export default function CourseDetailsPage({
                       </h2>
                       <p className="text-gray-600">{course.overview}</p>
                     </div>
-
                     <div>
                       <h2 className="text-xl font-bold mb-4 text-gray-900">
                         Key Topics
@@ -246,7 +246,6 @@ export default function CourseDetailsPage({
                         ))}
                       </ul>
                     </div>
-
                     <div>
                       <h2 className="text-xl font-bold mb-4 text-gray-900">
                         Who Should Enroll
@@ -257,7 +256,6 @@ export default function CourseDetailsPage({
                 </div>
               </div>
             </div>
-
             <div>
               <div className="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 md:sticky md:top-24">
                 <div className={`h-2 bg-gradient-to-r ${course.color}`} />
@@ -265,7 +263,6 @@ export default function CourseDetailsPage({
                   <h2 className="text-xl font-bold mb-6 text-gray-900">
                     Course Details
                   </h2>
-
                   <div className="space-y-4 mb-8">
                     <div className="flex items-center">
                       <Clock className="h-5 w-5 text-blue-600 mr-3" />
@@ -276,7 +273,6 @@ export default function CourseDetailsPage({
                         </p>
                       </div>
                     </div>
-
                     <div className="flex items-center">
                       <GraduationCap className="h-5 w-5 text-blue-600 mr-3" />
                       <div>
@@ -286,7 +282,6 @@ export default function CourseDetailsPage({
                         </p>
                       </div>
                     </div>
-
                     <div className="flex items-center">
                       <Award className="h-5 w-5 text-blue-600 mr-3" />
                       <div>
@@ -297,7 +292,6 @@ export default function CourseDetailsPage({
                       </div>
                     </div>
                   </div>
-
                   <Button className="w-full bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-700 hover:to-blue-500 text-white font-bold py-3 h-auto text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
                     Enroll Now
                   </Button>
