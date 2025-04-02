@@ -15,13 +15,6 @@ type ToasterToast = ToastProps & {
   action?: ToastActionElement;
 };
 
-// Replace actionTypes with a type definition
-type ActionType =
-  | "ADD_TOAST"
-  | "UPDATE_TOAST"
-  | "DISMISS_TOAST"
-  | "REMOVE_TOAST";
-
 let count = 0;
 
 function genId() {
