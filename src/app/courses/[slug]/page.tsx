@@ -2,13 +2,7 @@
 
 import { useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import {
-  CheckCircle,
-  Clock,
-  GraduationCap,
-  Award,
-  ArrowLeft,
-} from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 
