@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
@@ -170,19 +170,28 @@ const coursesData: Record<
 };
 
 interface CourseParams {
-  slug?: string;
+  slug: string;
 }
 
 export default function CourseDetailsPage({
   params,
 }: {
-  params?: CourseParams;
+  params: Promise<CourseParams>;
 }) {
+  const [courseSlug, setCourseSlug] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Resolve the params Promise and set the courseSlug
+    params.then((resolvedParams) => {
+      setCourseSlug(resolvedParams.slug);
+    });
+  }, [params]);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  if (!params?.slug || typeof params.slug !== "string") {
+  if (!courseSlug) {
     return (
       <main className="flex flex-col items-center justify-center min-h-screen pt-24">
         <div className="container mx-auto px-4 text-center">
@@ -199,7 +208,7 @@ export default function CourseDetailsPage({
     );
   }
 
-  const course = coursesData[params.slug as keyof typeof coursesData];
+  const course = coursesData[courseSlug as keyof typeof coursesData];
 
   if (!course) {
     return (
