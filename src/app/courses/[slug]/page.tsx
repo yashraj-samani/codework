@@ -12,7 +12,22 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 
-const coursesData = {
+const coursesData: Record<
+  string,
+  {
+    title: string;
+    description: string;
+    icon: string;
+    color: string;
+    duration: string;
+    level: string;
+    certification: string;
+    image: string;
+    overview: string;
+    keyTopics: string[];
+    whoShouldEnroll: string;
+  }
+> = {
   cpp: {
     title: "C++ Programming",
     description:
@@ -161,18 +176,34 @@ const coursesData = {
 };
 
 interface CourseParams {
-  slug: string;
+  slug?: string;
 }
 
 export default function CourseDetailsPage({
   params,
 }: {
-  params: CourseParams;
+  params?: CourseParams;
 }) {
-  // Scroll to top when the page loads
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  if (!params?.slug || typeof params.slug !== "string") {
+    return (
+      <main className="flex flex-col items-center justify-center min-h-screen pt-24">
+        <div className="container mx-auto px-4 text-center">
+          <h1 className="text-3xl font-bold mb-4">Invalid Course</h1>
+          <p className="mb-8">Course details are missing or incorrect.</p>
+          <Link href="/courses">
+            <Button>
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Back to Courses
+            </Button>
+          </Link>
+        </div>
+      </main>
+    );
+  }
 
   const course = coursesData[params.slug as keyof typeof coursesData];
 
@@ -182,8 +213,7 @@ export default function CourseDetailsPage({
         <div className="container mx-auto px-4 text-center">
           <h1 className="text-3xl font-bold mb-4">Course Not Found</h1>
           <p className="mb-8">
-            The course you&#39;re looking for doesn&#39;t exist or has been
-            removed.
+            The course you\'re looking for doesn\'t exist or has been removed.
           </p>
           <Link href="/courses">
             <Button>
@@ -220,7 +250,7 @@ export default function CourseDetailsPage({
                   </div>
                   <div className="relative w-full h-64 md:h-80 mb-8 rounded-lg overflow-hidden">
                     <Image
-                      src={course.image || "/placeholder.svg"}
+                      src={course.image}
                       alt={course.title}
                       fill
                       className="object-cover"
@@ -233,68 +263,7 @@ export default function CourseDetailsPage({
                       </h2>
                       <p className="text-gray-600">{course.overview}</p>
                     </div>
-                    <div>
-                      <h2 className="text-xl font-bold mb-4 text-gray-900">
-                        Key Topics
-                      </h2>
-                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-3">
-                        {course.keyTopics.map((topic, index) => (
-                          <li key={index} className="flex items-start">
-                            <CheckCircle className="h-5 w-5 text-green-500 mr-2 flex-shrink-0 mt-0.5" />
-                            <span className="text-gray-600">{topic}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div>
-                      <h2 className="text-xl font-bold mb-4 text-gray-900">
-                        Who Should Enroll
-                      </h2>
-                      <p className="text-gray-600">{course.whoShouldEnroll}</p>
-                    </div>
                   </div>
-                </div>
-              </div>
-            </div>
-            <div>
-              <div className="bg-white rounded-xl overflow-hidden shadow-lg border border-gray-100 md:sticky md:top-24">
-                <div className={`h-2 bg-gradient-to-r ${course.color}`} />
-                <div className="p-6">
-                  <h2 className="text-xl font-bold mb-6 text-gray-900">
-                    Course Details
-                  </h2>
-                  <div className="space-y-4 mb-8">
-                    <div className="flex items-center">
-                      <Clock className="h-5 w-5 text-blue-600 mr-3" />
-                      <div>
-                        <p className="text-sm text-gray-500">Duration</p>
-                        <p className="font-medium text-gray-900">
-                          {course.duration}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex items-center">
-                      <GraduationCap className="h-5 w-5 text-blue-600 mr-3" />
-                      <div>
-                        <p className="text-sm text-gray-500">Level</p>
-                        <p className="font-medium text-gray-900">
-                          {course.level}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex items-center">
-                      <Award className="h-5 w-5 text-blue-600 mr-3" />
-                      <div>
-                        <p className="text-sm text-gray-500">Certification</p>
-                        <p className="font-medium text-gray-900">
-                          {course.certification}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <Button className="w-full bg-gradient-to-r from-blue-600 to-blue-400 hover:from-blue-700 hover:to-blue-500 text-white font-bold py-3 h-auto text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300">
-                    Enroll Now
-                  </Button>
                 </div>
               </div>
             </div>
